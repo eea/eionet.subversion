@@ -1,0 +1,30 @@
+#
+# This is not a docker-compose file for production
+#
+#
+# Hostname and domainname are required
+# The environment variable LDAP_URL is required
+# Optional environment variables: SSL_KEY, SSL_CERT, SSL_CHAIN_CERTS, AUTH_NAME
+httpd:
+  build: .
+  ports:
+  - "80:80"
+  - "443:443"
+  hostname: localhost
+# domainname: eionet.europa.eu
+  environment:
+    LDAP_URL: "ldap://ldap3.eionet.europa.eu/ou=Users,o=Eionet,l=Europe?uid?one"
+    AUTH_NAME: "Eionet sitedirectory"
+  mem_limit: 314572800
+  labels:
+    io.rancher.sidekicks: svndata
+  volumes_from:
+  - svndata
+
+svndata:
+  image: tianon/true
+  labels:
+    io.rancher.container.start_once: "true"
+  volumes:
+  - "/var/tmp/svn:/var/local/svn"
+
