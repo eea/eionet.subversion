@@ -11,10 +11,24 @@ httpd:
   - "80:80"
   - "443:443"
   hostname: localhost
-# domainname: eionet.europa.eu
+# domainname: fqdn.com
   environment:
     LDAP_URL: "ldap://ldap3.eionet.europa.eu/ou=Users,o=Eionet,l=Europe?uid?one"
     AUTH_NAME: "Eionet sitedirectory"
+#   SSL_CERT: |-
+#     -----BEGIN CERTIFICATE-----
+#     MIID6jCCAtKgAwIBAgICHqswDQYJKoZIhvcNAQELBQAwgakxCzAJBgNVBAYTAi0t
+#     MRIwEAYDVQQIDAlTb21lU3RhdGUxETAPBgNVBAcMCFNvbWVDaXR5MRkwFwYDVQQK
+#        ...
+#     E8kMcRhFdi859Ts+42Gg5dYAdF2N0uVQDylIVd/uy71pqicgedY07l5MxKHSzA==
+#     -----END CERTIFICATE-----
+#   SSL_KEY: |-
+#     -----BEGIN RSA PRIVATE KEY-----
+#     MIIEowIBAAKCAQEAtoX1uP5Ea++9FIVSWBjjaGjwG4Kka4+FgISNiEGZpAqKKZ7/
+#     sUnIIA+Ns9UACmLYXZRTtpnFermLScbm/614g/2QFdyPYKpp4/IbaXr5G5ZHUpvD
+#        ...
+#     f39x3KkBa+/2gaa5B6Ff73DtcCpBTTaphlpVZRM7Yk4t2GRX2Z/6
+#     -----END RSA PRIVATE KEY-----
   mem_limit: 314572800
   labels:
     io.rancher.sidekicks: svndata
