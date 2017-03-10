@@ -13,7 +13,7 @@ Built automatically at https://hub.docker.com/r/eeacms/subversion/ when a change
 pushed to GitHub. To ensure that you always have an immutable build for produuction
 you create a new tag in GitHub.
 
-    $ version=v1.3
+    $ version=1.3
     $ git tag -a $version -m "Release $version of the subversion container"
     $ git push origin $version
 
