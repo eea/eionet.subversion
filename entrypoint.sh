@@ -42,6 +42,7 @@ DocumentRoot "${SVN_DIR}/public"
 DirectoryIndex index.html
 CustomLog /proc/self/fd/1 combined
 ErrorLog /proc/self/fd/2
+TraceEnable off
 !!
 
     if [ -n "$REDIRECT_HTTP" ]; then
@@ -93,6 +94,7 @@ CustomLog /proc/self/fd/1 combined
 ErrorLog /proc/self/fd/2
 #ServerName server.name
 
+TraceEnable off
 LogLevel warn
 
 SSLEngine on
