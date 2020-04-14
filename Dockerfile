@@ -1,4 +1,4 @@
-FROM centos:7.3.1611
+FROM centos:7.7.1908
 MAINTAINER Søren Roug <soren.roug@eea.europa.eu>
 
 VOLUME /var/local/svn
