@@ -92,14 +92,18 @@ DocumentRoot "${SVN_DIR}/public"
 DirectoryIndex index.html
 CustomLog /proc/self/fd/1 combined
 ErrorLog /proc/self/fd/2
+
+Header set Content-Security-Policy "default-src 'self';"
+Header set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+Header set X-Frame-Options SAMEORIGIN
 #ServerName server.name
 
 TraceEnable off
 LogLevel warn
 
 SSLEngine on
-SSLProtocol all -SSLv2 -SSLv3
-SSLCipherSuite HIGH:MEDIUM:!aNULL:!MD5
+SSLProtocol all -SSLv3 -TLSv1 -TLSv1.1
+SSLCipherSuite HIGH:MEDIUM:!RC4-SHA:!aNULL:!MD5
 #SSLHonorCipherOrder on
 
 SSLCertificateFile /etc/pki/tls/certs/localhost.crt

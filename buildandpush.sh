@@ -1,13 +1,14 @@
 
-VERS=1.3
+VERS=1.3.2
 #BUILDTIME=$(date '+%Y-%m-%dT%H%M')
 LATEST=latest
 NAME=eeacms/subversion
+REGISTRY=docker.io
 
-docker build -t ${NAME}:${LATEST} .
-docker tag ${NAME} ${NAME}:${VERS}
-#docker tag ${NAME} ${NAME}:${BUILDTIME}
-docker push ${NAME}:${LATEST}
-docker push ${NAME}:${VERS}
-#docker push ${NAME}:${BUILDTIME}
+docker build -t ${REGISTRY}/${NAME}:${LATEST} .
+docker tag ${REGISTRY}/${NAME} ${REGISTRY}/${NAME}:${VERS}
+#docker tag ${NAME} ${REGISTRY}/${NAME}:${BUILDTIME}
+docker push ${REGISTRY}/${NAME}:${LATEST}
+docker push ${REGISTRY}/${NAME}:${VERS}
+#docker push ${REGISTRY}/${NAME}:${BUILDTIME}
 
