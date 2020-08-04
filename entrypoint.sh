@@ -71,6 +71,7 @@ RewriteRule ^/?(.*) https://%{SERVER_NAME}/\$1 [R,L]
 !!
     fi
 
+    if [ -n "$SSL_ACTIVE" ]; then
     cat >> $CONFIGFILE <<!!
 Listen 443 https
 
@@ -130,7 +131,7 @@ ${CHAIN_CONF}
 
 </VirtualHost>
 !!
-
+  fi
 }
 
 
@@ -138,6 +139,9 @@ ${CHAIN_CONF}
 # MAIN
 ###########################################################
 
+if [ -n "$SSL_KEY" ]; then
+   SSL_ACTIVE=yes
+fi
 
 SVN_DIR="/var/local/svn"
 if [ -z "$LDAP_URL" ]; then
