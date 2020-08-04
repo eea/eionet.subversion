@@ -2,7 +2,10 @@ Eionet Subversion service
 =========================
 
 The image here expects the SVN data and configuration in /var/local/svn in the container, which you then map to a place on the host.
-The SSL keys are to be given in the environment variables SSL_KEY, SSL_CERT and SSL_CHAIN_CERTS. The LDAP connection string in LDAP_URL.
+The SSL keys are to be given in the environment variables `SSL_KEY`, `SSL_CERT` and `SSL_CHAIN_CERTS`. The LDAP connection string in `LDAP_URL`.
+
+If you want to activate SSL without providing `SSL_KEY` and `SSL_CERT`, then set `SSL_ACTIVE` to a non-empty string. You would want to do
+this if you have the key on a volume to mount.
 
 The source code repository is https://github.com/eea/eionet.subversion.
 
@@ -22,6 +25,6 @@ Make your edits...
     $ git push origin $version
 
 Docker Hub has, however, consistently been unable to build due to a
-cap_set_file error. In that case you can run the buildandpush.sh script
+`cap_set_file` error. In that case you can run the buildandpush.sh script
 to upload the image.
 
