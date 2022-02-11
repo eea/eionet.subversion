@@ -40,7 +40,10 @@ function create_conf {
 #ServerName server.name
 DocumentRoot "${SVN_DIR}/public"
 DirectoryIndex index.html
-CustomLog /proc/self/fd/1 combined
+#CustomLog /proc/self/fd/1 combined
+# Added X forwarded for parameter to the log
+LogFormat "%{X-Forwarded-For}i %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" combined_behindproxy
+CustomLog /proc/self/fd/1 combined_behindproxy
 ErrorLog /proc/self/fd/2
 TraceEnable off
 !!
