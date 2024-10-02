@@ -40,6 +40,7 @@ function create_conf {
 #ServerName server.name
 DocumentRoot "${SVN_DIR}/public"
 DirectoryIndex index.html
+ServerTokens Prod
 #CustomLog /proc/self/fd/1 combined
 # Added X forwarded for parameter to the log
 LogFormat "%{X-Forwarded-For}i %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" combined_behindproxy
@@ -52,7 +53,7 @@ TraceEnable off
         cat >> $CONFIGFILE <<!!
 RewriteEngine on
 RewriteCond %{HTTPS} !=on
-RewriteRule ^/?(.*) https://%{SERVER_NAME}/\$1 [R,L]
+RewriteRule ^/?(.*) https://%{HTTP_HOST}/\$1 [R,L]
 !!
     else
         cat >> $CONFIGFILE <<!!
