@@ -8,6 +8,7 @@ EXPOSE 80 443
 COPY entrypoint.sh /
 
 RUN chmod 755 /entrypoint.sh \
+    && yum -y update \
     && yum install -y epel-release httpd mod_ssl mod_dav_svn subversion mod_ldap python3-subversion
 
 CMD /entrypoint.sh

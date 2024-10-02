@@ -53,7 +53,6 @@ TraceEnable off
 RewriteEngine on
 RewriteCond %{HTTPS} !=on
 RewriteRule ^/?(.*) https://%{SERVER_NAME}/\$1 [R,L]
-#Redirect "/" "https://${SERVER_NAME}/"
 !!
     else
         cat >> $CONFIGFILE <<!!
@@ -161,7 +160,7 @@ if [ -n "$SSL_CHAIN_CERTS" ]; then
 fi
 
 AUTH_NAME="${AUTH_NAME:-Subversion}"
-SERVER_NAME=$(hostname)
+SERVER_NAME="${SERVER_NAME:-$(hostname)}"
 create_conf
 install_sslkey
 

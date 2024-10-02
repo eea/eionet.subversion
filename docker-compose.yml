@@ -1,3 +1,4 @@
+version: '3'
 #
 # This is not a docker-compose file for production
 #
@@ -5,40 +6,39 @@
 # Hostname and domainname are required
 # The environment variable LDAP_URL is required
 # Optional environment variables: SSL_KEY, SSL_CERT, SSL_CHAIN_CERTS, AUTH_NAME
-httpd:
-  build: .
-  ports:
-  - "80:80"
-  - "443:443"
-  hostname: localhost
-# domainname: fqdn.com
-  environment:
-    LDAP_URL: "ldap://ldap3.eionet.europa.eu/ou=Users,o=Eionet,l=Europe?uid?one"
-    AUTH_NAME: "Eionet sitedirectory"
-#   SSL_CERT: |-
-#     -----BEGIN CERTIFICATE-----
-#     MIID6jCCAtKgAwIBAgICHqswDQYJKoZIhvcNAQELBQAwgakxCzAJBgNVBAYTAi0t
-#     MRIwEAYDVQQIDAlTb21lU3RhdGUxETAPBgNVBAcMCFNvbWVDaXR5MRkwFwYDVQQK
-#        ...
-#     E8kMcRhFdi859Ts+42Gg5dYAdF2N0uVQDylIVd/uy71pqicgedY07l5MxKHSzA==
-#     -----END CERTIFICATE-----
-#   SSL_KEY: |-
-#     -----BEGIN RSA PRIVATE KEY-----
-#     MIIEowIBAAKCAQEAtoX1uP5Ea++9FIVSWBjjaGjwG4Kka4+FgISNiEGZpAqKKZ7/
-#     sUnIIA+Ns9UACmLYXZRTtpnFermLScbm/614g/2QFdyPYKpp4/IbaXr5G5ZHUpvD
-#        ...
-#     f39x3KkBa+/2gaa5B6Ff73DtcCpBTTaphlpVZRM7Yk4t2GRX2Z/6
-#     -----END RSA PRIVATE KEY-----
-  mem_limit: 314572800
-  labels:
-    io.rancher.sidekicks: svndata
-  volumes_from:
-  - svndata
+volumes:
+  svndata:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /var/tmp/svn
 
-svndata:
-  image: tianon/true
-  labels:
-    io.rancher.container.start_once: "true"
-  volumes:
-  - "/var/tmp/svn:/var/local/svn"
+services:
+  httpd:
+    build: .
+    ports:
+    - "80:80"
+    - "443:443"
+    environment:
+      LDAP_URL: "ldap://ldap3.eionet.europa.eu/ou=Users,o=Eionet,l=Europe?uid?one"
+      AUTH_NAME: "Eionet sitedirectory"
+      SERVER_NAME: myservice.domain.com
+  #   SSL_CERT: |-
+  #     -----BEGIN CERTIFICATE-----
+  #     MIID6jCCAtKgAwIBAgICHqswDQYJKoZIhvcNAQELBQAwgakxCzAJBgNVBAYTAi0t
+  #     MRIwEAYDVQQIDAlTb21lU3RhdGUxETAPBgNVBAcMCFNvbWVDaXR5MRkwFwYDVQQK
+  #        ...
+  #     E8kMcRhFdi859Ts+42Gg5dYAdF2N0uVQDylIVd/uy71pqicgedY07l5MxKHSzA==
+  #     -----END CERTIFICATE-----
+  #   SSL_KEY: |-
+  #     -----BEGIN RSA PRIVATE KEY-----
+  #     MIIEowIBAAKCAQEAtoX1uP5Ea++9FIVSWBjjaGjwG4Kka4+FgISNiEGZpAqKKZ7/
+  #     sUnIIA+Ns9UACmLYXZRTtpnFermLScbm/614g/2QFdyPYKpp4/IbaXr5G5ZHUpvD
+  #        ...
+  #     f39x3KkBa+/2gaa5B6Ff73DtcCpBTTaphlpVZRM7Yk4t2GRX2Z/6
+  #     -----END RSA PRIVATE KEY-----
+    mem_limit: 314572800
+    volumes:
+    - svndata:/var/local/svn
 
