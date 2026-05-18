@@ -21,7 +21,7 @@ Make your edits...
 
     $ git commit -a
     $ git push
-    $ version=2.2
+    $ version=3.0
     $ git tag -a $version -m "Release $version of the subversion container"
     $ git push origin $version
 

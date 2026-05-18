@@ -1,4 +1,4 @@
-FROM almalinux:9.4
+FROM almalinux:10-kitten
 MAINTAINER Søren Roug <soren.roug@eea.europa.eu>
 
 VOLUME /var/local/svn
