@@ -1,5 +1,5 @@
 
-VERS=3.0
+VERS=3.0.1
 #BUILDTIME=$(date '+%Y-%m-%dT%H%M')
 LATEST=latest
 NAME=eeacms/subversion
